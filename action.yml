@@ -70,7 +70,7 @@ runs:
         if [ -z "${GITHUB_COMMIT_URL}" ]; then
         DCO_RANGE=$(jq -r '.after + "..HEAD"' ${GITHUB_EVENT_PATH})
         else
-        DCO_RANGE=$(curl -H \"Accept: application/vnd.github+json\" -H \"Authorization: Bearer ${REPO_ACCESS_TOKEN}\"  ${GITHUB_COMMIT_URL} | jq -r '.[0].parents[0].sha + "..HEAD"')
+        DCO_RANGE=$(curl -H '\"Accept: application/vnd.github+json\"' -H '\"Authorization: Bearer ${REPO_ACCESS_TOKEN}\"'  ${GITHUB_COMMIT_URL} | jq -r '.[0].parents[0].sha + "..HEAD"')
         fi
         ${{ github.action_path }}/script/validate/dco
         echo "::endgroup::"
