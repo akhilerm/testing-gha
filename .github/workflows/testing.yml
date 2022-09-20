@@ -28,11 +28,8 @@ jobs:
     steps:
 
       - uses: actions/checkout@v2
-        with:
-          path: src/github.com/containerd/containerd
-          fetch-depth: 100
 
-      - uses: akhilerm/testing-gha@v1
+      - uses: ./checker/
         with:
-          working-directory: src/github.com/containerd/containerd
+          working-directory: /Users/makhil/go/src/github.com/containerd/project-checks
           repo-access-token: ${{ secrets.repo_token }}
