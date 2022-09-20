@@ -49,26 +49,15 @@ runs:
         echo "GOPATH=${{ github.workspace }}" >> $GITHUB_ENV
         echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
 
-    - name: Install dependencies
-      shell: bash
-      env:
-        GO111MODULE: off
-      run: |
-        echo "::group::🚧 Get dependencies"
-        go get -u -v github.com/vbatts/git-validation
-        go get -u -v github.com/kunalkushwaha/ltag
-        go get -u -v github.com/LK4D4/vndr
-        echo "::endgroup::"
-
     - name: DCO Checks
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       env:
-        GITHUB_COMMIT_URL: ${{ github.event.pull_request.commits_url }}
         REPO_ACCESS_TOKEN: ${{ secrets.repo_token }}
         DCO_VERBOSITY: "-v"
         DCO_RANGE: ""
       run: |
+        GITHUB_COMMIT_URL="https://api.github.com/repos/vmware-tanzu-midstream/containerd/pulls/7/commits"
         echo "::group::👮 DCO checks"
         set -x
         if [[ ! -z "${REPO_ACCESS_TOKEN}" ]]; then
@@ -82,19 +71,3 @@ runs:
         ${{ github.action_path }}/script/validate/dco
         echo "::endgroup::"
 
-    - name: Validate file headers
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: |
-        echo "::group::📚 File headers"
-        ${{ github.action_path }}/script/validate/fileheader ${{ github.action_path }}/
-        echo "::endgroup::"
-
-    - name: Validate vendor directory
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: |
-        export GO_MOD_TIDY_FLAGS="${{ inputs.go-mod-tidy-flags }}"
-        echo "::group::🚀 Vendor directory"
-        ${{ github.action_path }}/script/validate/vendor
-        echo "::endgroup::"
