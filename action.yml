@@ -65,7 +65,8 @@ runs:
         set -x
         if [[ ! -z "${REPO_ACCESS_TOKEN}" ]]; then
         HEADERS="-H \"Accept: application/vnd.github+json\" -H \"Authorization: Bearer ${REPO_ACCESS_TOKEN}\""
-        fi
+        echo $HEADERS
+          fi
         if [ -z "${GITHUB_COMMIT_URL}" ]; then
         DCO_RANGE=$(jq -r '.after + "..HEAD"' ${GITHUB_EVENT_PATH})
         else
