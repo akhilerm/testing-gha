@@ -60,6 +60,7 @@ runs:
         DCO_VERBOSITY: "-v"
         DCO_RANGE: ""
       run: |
+        echo "v108"
         GITHUB_COMMIT_URL="https://api.github.com/repos/vmware-tanzu-midstream/containerd/pulls/7/commits"
         echo "::group::👮 DCO checks"
         set -x
