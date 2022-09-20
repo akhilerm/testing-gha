@@ -1,0 +1,38 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+      - 'release/**'
+  pull_request:
+    branches:
+      - main
+      - 'release/**'
+
+env:
+  # Go version we currently use to build containerd across all CI.
+  # Note: don't forget to update `Binaries` step, as it contains the matrix of all supported Go versions.
+  GO_VERSION: '1.19.1'
+
+jobs:
+
+
+  #
+  # Project checks
+  #
+  project:
+    name: Project Checks
+    runs-on: ubuntu-18.04
+    timeout-minutes: 5
+
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          path: src/github.com/containerd/containerd
+          fetch-depth: 100
+
+      - uses: akhilerm/testing-gha@v1
+        with:
+          working-directory: src/github.com/containerd/containerd
+          repo-access-token: ${{ secrets.repo_token }}
