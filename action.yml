@@ -40,6 +40,9 @@ inputs:
   go-mod-tidy-flags:
     required: false
     description: go mod tidy flags, such as -compat=1.17
+  repo-access-token:
+    required: false
+    description: token needed to access repository commits
 runs:
   using: composite
   steps:
@@ -53,7 +56,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       env:
-        REPO_ACCESS_TOKEN: ${{ secrets.repo_token }}
+        REPO_ACCESS_TOKEN: ${{ inputs.repo-access-token }}
         DCO_VERBOSITY: "-v"
         DCO_RANGE: ""
       run: |
