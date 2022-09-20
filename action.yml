@@ -64,7 +64,7 @@ runs:
         echo "::group::👮 DCO checks"
         set -x
         if [[ ! -z "${REPO_ACCESS_TOKEN}" ]]; then
-        HEADERS="-H \"Accept: application/vnd.github+json\" -H \"Authorization: Bearer ${REPO_ACCESS_TOKEN}\""
+        HEADERS=-H \"Accept: application/vnd.github+json\" -H \"Authorization: Bearer ${REPO_ACCESS_TOKEN}\"
         echo $HEADERS
           fi
         if [ -z "${GITHUB_COMMIT_URL}" ]; then
