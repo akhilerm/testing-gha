@@ -13,4 +13,4 @@ jobs:
     steps:
 
       - name: Test ip6
-        run: ip6tables -t nat -C CNI-HOSTPORT-SETMARK -m comment --comment CNI portfwd masquerade mark -j MARK --set-xmark 0x2000/0x2000 --wait
+        run: ip6tables --set-xmark 0x2000/0x2000 --wait
