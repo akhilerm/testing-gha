@@ -4,10 +4,8 @@ on:
     branches:
       - ubuntu-2204-testing
 
-  #
-  # Project checks
-  #
-  project:
+jobs:
+  test-ubuntu22:
     name: Project Checks
     runs-on: ubuntu-22.04
     timeout-minutes: 5
