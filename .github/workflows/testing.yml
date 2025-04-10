@@ -2,34 +2,17 @@ name: CI
 on:
   push:
     branches:
-      - main
-      - 'release/**'
-  pull_request:
-    branches:
-      - main
-      - 'release/**'
-
-env:
-  # Go version we currently use to build containerd across all CI.
-  # Note: don't forget to update `Binaries` step, as it contains the matrix of all supported Go versions.
-  GO_VERSION: '1.19.1'
-
-jobs:
-
+      - ubuntu-2204-testing
 
   #
   # Project checks
   #
   project:
     name: Project Checks
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 5
 
     steps:
 
-      - uses: actions/checkout@v2
-
-      - uses: ./checker/
-        with:
-          working-directory: /Users/makhil/go/src/github.com/containerd/project-checks
-          repo-access-token: ${{ secrets.repo_token }}
+      - name: Test ip6
+        run: ip6tables -t nat -C CNI-HOSTPORT-SETMARK -m comment --comment CNI portfwd masquerade mark -j MARK --set-xmark 0x2000/0x2000 --wait
