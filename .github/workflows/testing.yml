@@ -5,8 +5,8 @@ on:
       - ubuntu-2204-testing
 
 jobs:
-  test-ubuntu-ipv6:
-    name: Test Ubuntu IPv6 MARK
+  test-ubuntu-iptables:
+    name: Test Ubuntu iptables MARK
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
 
