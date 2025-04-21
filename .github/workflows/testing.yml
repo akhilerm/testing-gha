@@ -13,8 +13,9 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-24.04, ubuntu-22.04]
+        iptables: [iptables, ip6tables]
 
     steps:
 
       - name: Test ip6
-        run: sudo iptables -t mangle -A PREROUTING -p tcp --dport 80 -j MARK --set-xmark 0x1/0x1
+        run: sudo ${{ matrix.iptables }} -t mangle -A PREROUTING -p tcp --dport 80 -j MARK --set-xmark 0x1/0x1
