@@ -5,8 +5,8 @@ on:
       - ubuntu-2204-testing
 
 jobs:
-  test-ubuntu22:
-    name: Project Checks
+  test-ubuntu-ipv6:
+    name: Test Ubuntu IPv6 MARK
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
 
@@ -17,4 +17,4 @@ jobs:
     steps:
 
       - name: Test ip6
-        run: ip6tables --set-xmark 0x2000/0x2000 --wait
+        run: sudo iptables -t mangle -A PREROUTING -p tcp --dport 80 -j MARK --set-xmark 0x1/0x1
