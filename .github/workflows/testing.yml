@@ -16,8 +16,8 @@ jobs:
       matrix:
         box: [almalinux/8, almalinux/9, fedora/cloudbase]
         include:
-          box: almalinux/8
-          runtime: [runtime.v1, io.runtime.v1]
+          - box: almalinux/8
+            runtime: [runtime.v1, io.runtime.v1]
 
     steps:
 
