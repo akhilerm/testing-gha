@@ -2,22 +2,25 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - test-matrix
 
 jobs:
-  test-ubuntu-iptables:
-    name: Test Ubuntu iptables MARK
-    runs-on: ${{ matrix.os }}
+  test-matrix-jobs:
+    name: Test Matrix include
+    runs-on: ubuntu-22.04
     timeout-minutes: 5
 
 
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-24.04, ubuntu-22.04]
-        iptables: [iptables, ip6tables]
+        box: [almalinux/8, almalinux/9, fedora/cloudbase]
+        include:
+          box: almaxlinux/8
+          runtime: [runtime.v1, io.runtime.v1]
 
     steps:
 
-      - name: Test ip6
-        run: sudo ${{ matrix.iptables }} -t mangle -A PREROUTING -p tcp --dport 80 -j MARK --set-xmark 0x1/0x1
+      - name: Test matrix
+        run: |
+          echo {{ matrix.box }} - {{ matrix.runtime }}
