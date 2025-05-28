@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - ubuntu-2204-testing
+      - main
 
 jobs:
   test-ubuntu-iptables:
