@@ -12,5 +12,9 @@ jobs:
     steps:
       - name: Version check containerd
         run: containerd --version
+      - name: Which
+        run: which containerd
+      - name: Which runc
+        run: which runc
       - name: Version check runc
         run: runc --version
