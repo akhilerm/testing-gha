@@ -2,22 +2,15 @@ name: CI
 on:
   push:
     branches:
-      - ubuntu-2204-testing
+      - ubuntu-24-testing
 
 jobs:
-  test-ubuntu-iptables:
-    name: Test Ubuntu iptables MARK
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 5
-
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-24.04, ubuntu-22.04]
-        iptables: [iptables, ip6tables]
+  test-default-containerd:
+    name: Test Default containerd
+    runs-on: ubuntu-24.04
 
     steps:
-
-      - name: Test ip6
-        run: sudo ${{ matrix.iptables }} -t mangle -A PREROUTING -p tcp --dport 80 -j MARK --set-xmark 0x1/0x1
+      - name: Version check containerd
+        run: containerd --version
+      - name: Version check runc
+        run: runc --version
