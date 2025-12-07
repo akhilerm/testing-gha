@@ -13,7 +13,7 @@ jobs:
         with:
           repository: kubernetes/kubernetes
           path: src/k8s.io/kubernetes
-          fetch-depth: 0
+          fetch-tags: true
 
       - name: Test all tags
         working-directory: ./src/k8s.io/kubernetes
