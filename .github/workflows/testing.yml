@@ -2,19 +2,23 @@ name: CI
 on:
   push:
     branches:
-      - ubuntu-24-testing
+      - checkout-testing
 
 jobs:
-  test-default-containerd:
-    name: Test Default containerd
-    runs-on: ubuntu-24.04
-
+  test-checkout-actions:
+    runs-on: ubuntu-latest
+    name: Testing Actions checkout
     steps:
-      - name: Version check containerd
-        run: containerd --version
-      - name: Which
-        run: which containerd
-      - name: Which runc
-        run: which runc
-      - name: Version check runc
-        run: runc --version
+      - uses: actions/checkout@v6
+        with:
+          repository: kubernetes/kubernetes
+          path: src/k8s.io/kubernetes
+          fetch-depth: 0
+
+      - name: Test all tags
+        working-directory: ./src/k8s.io/kubernetes
+        run: |
+          echo "All tags"
+          git tag
+          echo "Count tags"
+          git tag | wc -l
