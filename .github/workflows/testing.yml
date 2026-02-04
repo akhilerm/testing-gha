@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Testing Actions checkout
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
         with:
           repository: kubernetes/kubernetes
           path: src/k8s.io/kubernetes
