@@ -13,6 +13,7 @@ jobs:
         with:
           repository: kubernetes/kubernetes
           path: src/k8s.io/kubernetes
+          fetch-tags: true
 
 #      - working-directory: ./src/k8s.io/kubernetes
 #        run: |
